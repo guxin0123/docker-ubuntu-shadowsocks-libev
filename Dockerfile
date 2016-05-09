@@ -1,5 +1,5 @@
 FROM ubuntu:trusty
-MAINTAINER alaudadoc alaudadoc@alauda.cn
+MAINTAINER guxin0123 guxin0123@gmail.com
 
 
 
