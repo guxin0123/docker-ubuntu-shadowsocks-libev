@@ -11,8 +11,11 @@ RUN apt-get update && apt-get install -y wget
 RUN wget -O- http://shadowsocks.org/debian/1D27208A.gpg | apt-key add -
 RUN echo "deb http://shadowsocks.org/ubuntu trusty main"  | cat >> /etc/apt/sources.list
 RUN apt-get update && apt-get install -y shadowsocks-libev
-RUN echo '{"server":"0.0.0.0","server_port":'$SS_PORT',"password":"'$SS_PASSWORD'","timeout":60,"method":"'$SS_METHOD'"}' > /etc/shadowsocks-libev/myConfig.json
 
+ADD startServer.sh /startServer.sh
+RUN chmod 755 /startServer.sh
 
-EXPOSE 8388
-CMD ss-server -c /etc/shadowsocks-libev/myConfig.json
+EXPOSE $SS_PORT
+
+CMD ["sh", "-c", "/startServer.sh"]
+
